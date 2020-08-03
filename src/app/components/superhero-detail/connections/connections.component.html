@@ -1,0 +1,31 @@
+<main role="main" class="container">
+    <h1 class="mt-5">Personaje seleccionado: {{personaje.name}}</h1>
+    <hr/>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8" >
+            <div class="row">
+                <div class="col-6">
+                    <img src='{{personaje.image}}' width="200px" > 
+                </div>
+                <div class="col-6">
+                    <h4>Work</h4>
+                    <label>Group affiliation: {{ connections.groupaffiliation }}</label><br/>
+                    <label>Relatives: {{ connections.relatives }}</label><br/>
+                </div>
+                
+            </div>
+            <br/>
+            <div class="row">
+                        
+                <a  class="btn btn-primary btn-block" [routerLink]="['/powerstats', personaje.id]">Powerstats</a>
+                <a  class="btn btn-primary btn-block" [routerLink]="['/appearance', personaje.id]">Appearance</a>
+                <a  class="btn btn-primary btn-block" [routerLink]="['/biography', personaje.id]">Biography</a>
+                <a  class="btn btn-primary btn-block" [routerLink]="['/work', personaje.id]">Work</a>
+                <a  class="btn btn-danger btn-block" href="/home"> << Volver al Home</a>
+            </div>
+
+        </div>
+        <div class="col-2"></div>
+    </div>
+</main>

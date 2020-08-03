@@ -1,0 +1,10 @@
+<main role="main" class="container">
+    <h1 class="mt-5">Listado de Superheroes</h1>
+    <p class="lead">Selecciona alguno de los personjes para obtener más info</p>
+    <hr/>
+    <div class="row">
+        <div class="col-4" *ngFor="let p of personajes">
+            <app-superhero [personaje]=p ></app-superhero>
+        </div>
+    </div>
+</main>

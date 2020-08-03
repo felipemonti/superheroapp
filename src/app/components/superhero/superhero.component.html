@@ -1,0 +1,13 @@
+<div class="card mb-4 text-center" >
+    <img src='{{personaje.image}}' width="348px" height="464px"> 
+    <div class="card-body">
+        <h5 class="card-title">{{personaje.name}}</h5>
+    </div>
+    <div class="card-footer">
+        <a  class="btn btn-primary btn-block" [routerLink]="['/powerstats', personaje.id]">Powerstats</a>
+        <a  class="btn btn-primary btn-block" [routerLink]="['/appearance', personaje.id]">Appearance</a>
+        <a  class="btn btn-primary btn-block" [routerLink]="['/biography', personaje.id]">Biography</a>
+        <a  class="btn btn-primary btn-block" [routerLink]="['/connections', personaje.id]">Connections</a>
+        <a  class="btn btn-primary btn-block" [routerLink]="['/work', personaje.id]">Work</a>
+    </div>
+</div>

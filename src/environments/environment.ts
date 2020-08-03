@@ -2,8 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const access_token = '10159021108151002';
+const url_base = 'https://superheroapi.com/api.php'
+
 export const environment = {
-  production: false
+  production: false,
+  api: url_base + '/' + access_token
 };
 
 /*
