@@ -16,61 +16,87 @@ export class HomeComponent implements OnInit {
 
   personajes: Personaje[] = [];
   subscriptionSearchData: Subscription;
+  dataSearch:string = "";
 
   constructor(private serv: SuperheroService) { 
-    this.subscriptionSearchData = this.serv.observableSearchData$.subscribe(
-      dataSearch => {
-        if(dataSearch){
-          this.obtenerPorFiltro(dataSearch);
-        }
-      }
-    );
+    
   }
+
+
 
   ngOnInit() {
-    this.obtenerTodos();
+    this.obtenerAleatorios();
   }
 
+  obtenerPorFiltro(){
+    this.personajes = [];
 
-
-  obtenerPorFiltro(dataSearch){
-    this.serv.findByName(dataSearch)
-    .pipe(
-      take(1)
-    )
-    .subscribe(
-      resp => {
-        this.personajes = [];
-        
-        if(resp.response == 'error'){
-          this.personajes = [];
-        }else{
-          let total:number = resp.results.length;
-          for (let index = 0; index < total; index++) {
-            let element = resp.results[index];
-            let personaje:Personaje = new Personaje;
-
-            personaje.image = element.image.url;
-            personaje.name = element.name;
-            personaje.id = element.id;
-
-
-            this.personajes.push(personaje);
-          }
-        }
-      }
-    );
-  }
-
-
-  obtenerTodos(){
-    for (let index = 1; index < 10; index++) {
-      this.serv.findSuperheroById(index)
+    if(this.dataSearch != ""){
+      this.serv.findByName(this.dataSearch)
       .pipe(
         take(1)
       )
       .subscribe(
         resp => {
+          
+          if(resp.response == 'error'){
+            console.log('Error: '+resp);
+          }else{
+            let total:number = resp.results.length;
+            for (let index = 0; index < total; index++) {
+              let element = resp.results[index];
+              let personaje:Personaje = new Personaje;
+  
+              personaje.image = element.image.url;
+              personaje.name = element.name;
+              personaje.id = element.id;
+  
+  
+              this.personajes.push(personaje);
+            }
+          }
+
+          this.dataSearch = "";
+        }
+      );
+    }
+    
+  }
+
+  private generarNumeros(ini:number, fin:number, cantidad:number){
+    let array = [];
+  
+    for (let index = 0; index < cantidad; index++) {
+      let num:number = Math.round(Math.random() * (fin - ini) + ini + 1);
+
+
+      if(array.indexOf(num)!=-1){
+        console.log('existe '+num);
+        index--;
+      }else{
+        console.log('NO existe '+num);
+        array.push(num);
+      }
+    }
+    
+    console.log(array);
+    return array;
+  }
+
+  obtenerAleatorios(){
+    this.dataSearch = "";
+    this.personajes = [];
+          
+    let arrayDeNumeros = this.generarNumeros(1,720,9);
+
+    arrayDeNumeros.forEach(num => {
+      this.serv.findSuperheroById(num)
+      .pipe(
+        take(1)
+      )
+      .subscribe(
+        resp => {
+
           let pers: Personaje = new Personaje;
 
           console.log(resp);
@@ -95,7 +121,8 @@ export class HomeComponent implements OnInit {
         }
       );
 
-    }
+    });
+
   }
 
 

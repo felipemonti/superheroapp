@@ -1,6 +1,16 @@
 <main role="main" class="container">
     <h1 class="mt-5">Listado de Superheroes</h1>
-    <p class="lead">Selecciona alguno de los personjes para obtener más info</p>
+    <p class="lead">Selecciona alguno de los personjes para obtener más info o buscalo por su nombre</p>
+
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Ingrese nombre del personaje" aria-label="Search" [(ngModel)]="dataSearch">
+        <div class="input-group-append">
+            <button class="btn btn-outline-success my-2 my-sm-0" (click)="obtenerPorFiltro()">Buscar</button>
+            <button class="btn btn-outline-danger my-2 my-sm-0" (click)="obtenerAleatorios()">Aleatorios</button>
+        </div>
+    </div>
+
     <hr/>
     <div class="row">
         <div class="col-4" *ngFor="let p of personajes">

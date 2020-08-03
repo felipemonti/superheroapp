@@ -12,28 +12,15 @@ export class NavbarComponent implements OnInit {
 
   resultadoBusqueda: Personaje[] = [];
 
-  // Propiedades
-  public searchData = null;
-  public subscriptionSearchData: Subscription;
   
 
   constructor(private serv:SuperheroService) {
-    this.subscriptionSearchData = this.serv.observableSearchData$
-    .subscribe(
-      dataSearch => {
-        this.searchData = dataSearch; //me subscribo para estar escuchando dinamicamente y constamente la busqueda en el navbar
-      }
-    );
+    
   }
 
   ngOnInit() {
   }
 
   
-  public search() {
-    if(this.searchData) {
-      this.serv.nextData(this.searchData);
-    }
-  }
 
 }
